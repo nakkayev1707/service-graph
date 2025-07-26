@@ -58,7 +58,7 @@ public class HtmlBuilder
     {
         Assembly assembly = typeof(ServiceGraphUIMiddleware).GetTypeInfo().Assembly;
 
-        await using Stream stream = assembly.GetManifestResourceStream(TemplateFileName);
+        await using Stream? stream = assembly.GetManifestResourceStream(TemplateFileName);
         if (stream == null)
         {
             throw new FileNotFoundException("Template file not found: " + TemplateFileName);

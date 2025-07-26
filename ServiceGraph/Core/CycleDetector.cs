@@ -61,19 +61,22 @@ public class CycleDetector
             visited[node] = true;
             inStack[node] = true;
             
-            foreach (var edge in graph.Edges)
+            if (graph != null)
             {
-                if (EqualityComparer<Type>.Default.Equals(edge.Source, node))
+                foreach (var edge in graph.Edges)
                 {
-                    Type? neighbor = edge.Target;
+                    if (EqualityComparer<Type>.Default.Equals(edge.Source, node))
+                    {
+                        Type? neighbor = edge.Target;
 
-                    if (!visited[neighbor] && DFS(visited, neighbor, inStack, graph))
-                    {
-                        return true;
-                    }
-                    if (inStack[neighbor])
-                    {
-                        return true;
+                        if (!visited[neighbor] && DFS(visited, neighbor, inStack, graph))
+                        {
+                            return true;
+                        }
+                        if (inStack[neighbor])
+                        {
+                            return true;
+                        }
                     }
                 }
             }
